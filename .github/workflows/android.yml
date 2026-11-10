@@ -20,16 +20,12 @@ jobs:
         with:
           gradle-version: '8.7'
 
-      - uses: android-actions/setup-android@v3
-
-      - name: Instalar Android SDK
-        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
+      - name: Extraer proyecto
+        run: unzip -q H96_NEXUS_Proyecto_para_compilar.zip -d proyecto
 
       - name: Compilar APK
-        run: |
-          unzip -q H96_NEXUS_Proyecto_para_compilar.zip -d proyecto
-          cd proyecto/H96_NEXUS_Proyecto_para_compilar
-          gradle assembleDebug
+        run: gradle assembleDebug
+        working-directory: proyecto/H96_NEXUS_Proyecto_para_compilar
 
       - uses: actions/upload-artifact@v4
         with:
